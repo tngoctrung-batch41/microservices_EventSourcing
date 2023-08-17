@@ -19,7 +19,7 @@ public class BookCommandController {
         this.commandGateway = commandGateway;
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public String addProduct (@RequestBody BookRestModel bookRestModel){
         CreateBookCommand createProductCommand =
                 CreateBookCommand.builder()
