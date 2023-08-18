@@ -14,7 +14,7 @@ import lombok.*;
 @Table(name = "book")
 public class Book {
     @Id
-    private String id;
+    private String bookId;
     private String title;
     private String author;
     private boolean isReady;

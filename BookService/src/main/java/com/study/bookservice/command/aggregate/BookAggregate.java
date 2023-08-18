@@ -1,9 +1,12 @@
 package com.study.bookservice.command.aggregate;
 
 import com.study.bookservice.command.commands.CreateBookCommand;
+import com.study.bookservice.command.commands.DeleteBookCommand;
+import com.study.bookservice.command.commands.UpdateBookCommand;
 import com.study.bookservice.command.events.BookCreatedEvent;
+import com.study.bookservice.command.events.BookDeletedEvent;
+import com.study.bookservice.command.events.BookUpdatedEvent;
 import org.axonframework.commandhandling.CommandHandler;
-import org.axonframework.eventhandling.EventHandler;
 import org.axonframework.eventsourcing.EventSourcingHandler;
 import org.axonframework.modelling.command.AggregateIdentifier;
 import org.axonframework.modelling.command.AggregateLifecycle;
@@ -27,10 +30,6 @@ public class BookAggregate {
         //pubplish created event
         AggregateLifecycle.apply(bookCreatedEvent);
     }
-
-    public BookAggregate() {
-    }
-
     //publisher the event
     @EventSourcingHandler
     public void on(BookCreatedEvent bookCreatedEvent){
@@ -39,4 +38,35 @@ public class BookAggregate {
         this.author = bookCreatedEvent.getAuthor();
         this.isReady = bookCreatedEvent.isReady();
     }
+
+    @CommandHandler
+    public void handle (UpdateBookCommand updateBookCommand) {
+        BookUpdatedEvent bookUpdatedEvent = new BookUpdatedEvent();
+        BeanUtils.copyProperties(updateBookCommand,bookUpdatedEvent);
+        AggregateLifecycle.apply(bookUpdatedEvent);
+    }
+    //publisher the event
+    @EventSourcingHandler
+    public void on(BookUpdatedEvent bookCreatedEvent){
+        this.bookId = bookCreatedEvent.getBookId();
+        this.title = bookCreatedEvent.getTitle();
+        this.author = bookCreatedEvent.getAuthor();
+        this.isReady = bookCreatedEvent.isReady();
+    }
+
+    @CommandHandler
+    public void handle (DeleteBookCommand deleteBookCommand) {
+        BookDeletedEvent bookDeletedEvent = new BookDeletedEvent();
+        BeanUtils.copyProperties(deleteBookCommand, bookDeletedEvent);
+        AggregateLifecycle.apply(bookDeletedEvent);
+    }
+    //publisher the event
+    @EventSourcingHandler
+    public void on(DeleteBookCommand deleteBookEvent){
+        this.bookId = deleteBookEvent.getBookId();
+    }
+    public BookAggregate() {
+    }
+
+
 }
