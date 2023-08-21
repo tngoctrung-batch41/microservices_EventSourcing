@@ -4,7 +4,7 @@ import lombok.*;
 
 @Data
 @Builder
-public class BookRestModel {
+public class BookRequestModel {
     private String title;
     private String author;
     private boolean isReady;

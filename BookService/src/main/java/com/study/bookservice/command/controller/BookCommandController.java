@@ -1,9 +1,10 @@
 package com.study.bookservice.command.controller;
 
 import com.study.bookservice.command.commands.CreateBookCommand;
+import com.study.bookservice.command.commands.DeleteAllBookCommand;
 import com.study.bookservice.command.commands.DeleteBookCommand;
 import com.study.bookservice.command.commands.UpdateBookCommand;
-import com.study.bookservice.command.model.BookRestModel;
+import com.study.bookservice.command.model.BookRequestModel;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,30 +20,30 @@ public class BookCommandController {
     }
 
     @PostMapping("/create")
-    public String addProduct (@RequestBody BookRestModel bookRestModel){
+    public String addProduct (@RequestBody BookRequestModel bookRequestModel){
         CreateBookCommand createProductCommand =
                 CreateBookCommand.builder()
                         .bookId(UUID.randomUUID().toString())
-                        .title(bookRestModel.getTitle())
-                        .author(bookRestModel.getAuthor())
+                        .title(bookRequestModel.getTitle())
+                        .author(bookRequestModel.getAuthor())
                         .isReady(true)
                         .build();
 //        send this command to command gateway
         String result = commandGateway.sendAndWait(createProductCommand);
-        return result;
+        return "Created book with id: "+result;
     }
 
     @PutMapping("/update/{id}")
-    public String updateBook (@RequestBody BookRestModel bookRestModel, @PathVariable String id){
+    public String updateBook (@RequestBody BookRequestModel bookRequestModel, @PathVariable String id){
         UpdateBookCommand updateBookCommand =
             UpdateBookCommand.builder()
                     .bookId(id)
-                    .author(bookRestModel.getAuthor())
-                    .title(bookRestModel.getTitle())
-                    .isReady(bookRestModel.isReady())
+                    .author(bookRequestModel.getAuthor())
+                    .title(bookRequestModel.getTitle())
+                    .isReady(bookRequestModel.isReady())
                     .build();
-    String result = commandGateway.sendAndWait(updateBookCommand);
-        return result;
+         commandGateway.sendAndWait(updateBookCommand);
+        return "Updated book";
     }
 
     @DeleteMapping("/delete/{id}")
@@ -51,9 +52,17 @@ public class BookCommandController {
                 DeleteBookCommand.builder()
                         .bookId(id)
                         .build();
-
-        String result = commandGateway.sendAndWait(deleteBookCommand);
-        return result;
+         commandGateway.sendAndWait(deleteBookCommand);
+        return "Deleted book";
     }
+
+    @DeleteMapping("/deleteAll")
+    public String deleteAll(){
+        DeleteAllBookCommand deleteAllBookCommand = DeleteAllBookCommand.builder().build();
+        commandGateway.sendAndWait(deleteAllBookCommand);
+        return "Deleted ALl Book";
+    }
+
+
 
 }

@@ -39,6 +39,12 @@ public class BookEventHandler {
 //        throw new Exception("Exception Occurred");
     }
 
+    @EventHandler
+    public void on (DeletedAllBookEvent event) throws Exception {
+        bookRepository.deleteAll();
+//        throw new Exception("Exception Occurred");
+    }
+
     @ExceptionHandler
     public void handle(Exception exception) throws Exception {
         throw exception;

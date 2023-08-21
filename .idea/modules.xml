@@ -6,6 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/BookService/BookService.iml" filepath="$PROJECT_DIR$/BookService/BookService.iml" />
       <module fileurl="file://$PROJECT_DIR$/Config-Server/Config-Server.iml" filepath="$PROJECT_DIR$/Config-Server/Config-Server.iml" />
       <module fileurl="file://$PROJECT_DIR$/Discovery-Server/Discovery-Server.iml" filepath="$PROJECT_DIR$/Discovery-Server/Discovery-Server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/EmployeeService/EmployeeService.iml" filepath="$PROJECT_DIR$/EmployeeService/EmployeeService.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/advance-microsevices.iml" filepath="$PROJECT_DIR$/.idea/advance-microsevices.iml" />
     </modules>
   </component>

@@ -2,8 +2,11 @@ package com.study.bookservice.query.projection;
 
 import com.study.bookservice.command.data.Book;
 import com.study.bookservice.command.data.BookRepository;
-import com.study.bookservice.command.model.BookRestModel;
+import com.study.bookservice.command.model.BookRequestModel;
+import com.study.bookservice.query.model.BookResponseModel;
+import com.study.bookservice.query.queries.GetAllBookQuery;
 import com.study.bookservice.query.queries.GetBookQuery;
+import jakarta.ws.rs.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.axonframework.queryhandling.QueryHandler;
 import org.springframework.stereotype.Component;
@@ -17,18 +20,28 @@ public class BookProjection {
     private final BookRepository bookRepository;
 
     @QueryHandler
-    public List<BookRestModel> handle (GetBookQuery getBookQuery){
+    public List<BookResponseModel> handle (GetAllBookQuery getAllBookQuery){
         List<Book> books = bookRepository.findAll();
-
-        List<BookRestModel> bookRestModels =
+        List<BookResponseModel> bookResponseModels =
             books.stream()
-                    .map(book -> BookRestModel.builder()
+                    .map(book -> BookResponseModel.builder()
                             .title(book.getTitle())
                             .author(book.getAuthor())
                             .isReady(book.isReady())
                             .build())
                     .collect(Collectors.toList());
 
-        return bookRestModels;
+        return bookResponseModels;
+    }
+
+    @QueryHandler
+    public BookResponseModel handle(GetBookQuery getBookQuery){
+        Book book = bookRepository.findById(getBookQuery.getBookId()).orElseThrow(()-> new NotFoundException("Not Found"));
+        BookResponseModel model = BookResponseModel.builder()
+                .title(book.getTitle())
+                .author(book.getAuthor())
+                .isReady(book.isReady())
+                .build();
+        return model;
     }
 }

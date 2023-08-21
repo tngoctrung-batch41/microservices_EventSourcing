@@ -1,11 +1,13 @@
 package com.study.bookservice.command.aggregate;
 
 import com.study.bookservice.command.commands.CreateBookCommand;
+import com.study.bookservice.command.commands.DeleteAllBookCommand;
 import com.study.bookservice.command.commands.DeleteBookCommand;
 import com.study.bookservice.command.commands.UpdateBookCommand;
 import com.study.bookservice.command.events.BookCreatedEvent;
 import com.study.bookservice.command.events.BookDeletedEvent;
 import com.study.bookservice.command.events.BookUpdatedEvent;
+import com.study.bookservice.command.events.DeletedAllBookEvent;
 import org.axonframework.commandhandling.CommandHandler;
 import org.axonframework.eventsourcing.EventSourcingHandler;
 import org.axonframework.modelling.command.AggregateIdentifier;
@@ -22,11 +24,11 @@ public class BookAggregate {
     private boolean isReady;
 
     @CommandHandler
-    public BookAggregate(CreateBookCommand createProductCommand) {
+    public BookAggregate(CreateBookCommand createBookCommand) {
         //you can perform all the validations
         BookCreatedEvent bookCreatedEvent = new BookCreatedEvent();
         //coppy all the properties of crea to created
-        BeanUtils.copyProperties(createProductCommand,bookCreatedEvent);
+        BeanUtils.copyProperties(createBookCommand,bookCreatedEvent);
         //pubplish created event
         AggregateLifecycle.apply(bookCreatedEvent);
     }
@@ -64,6 +66,12 @@ public class BookAggregate {
     @EventSourcingHandler
     public void on(DeleteBookCommand deleteBookEvent){
         this.bookId = deleteBookEvent.getBookId();
+    }
+
+    @CommandHandler
+    public void handle (DeleteAllBookCommand deleteAllBookCommand) {
+        DeletedAllBookEvent bookDeletedEvent = new DeletedAllBookEvent();
+        AggregateLifecycle.apply(bookDeletedEvent);
     }
     public BookAggregate() {
     }
