@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/book")
+@RequestMapping("/api/v1/book")
 public class BookCommandController {
     private final CommandGateway commandGateway;
 

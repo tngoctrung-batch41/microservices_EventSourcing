@@ -30,7 +30,6 @@ public class BookProjection {
                             .isReady(book.isReady())
                             .build())
                     .collect(Collectors.toList());
-
         return bookResponseModels;
     }
 

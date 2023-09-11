@@ -10,6 +10,7 @@
         <module name="APIgateway" />
         <module name="ShipmentService" />
         <module name="UserService" />
+        <module name="NotifycationService" />
         <module name="BookService" />
         <module name="CommonService" />
         <module name="Discovery-Server" />
@@ -26,6 +27,8 @@
       <module name="Config-Server" target="17" />
       <module name="Discovery-Server" target="17" />
       <module name="EmployeeService" target="17" />
+      <module name="NotificationService" target="17" />
+      <module name="NotifycationService" target="17" />
       <module name="OrderService" target="17" />
       <module name="PaymentService" target="17" />
       <module name="ShipmentService" target="17" />
@@ -40,6 +43,8 @@
       <module name="Config-Server" options="-parameters" />
       <module name="Discovery-Server" options="-parameters" />
       <module name="EmployeeService" options="-parameters" />
+      <module name="NotificationService" options="-parameters" />
+      <module name="NotifycationService" options="-parameters" />
       <module name="OrderService" options="-parameters" />
       <module name="PaymentService" options="-parameters" />
       <module name="ShipmentService" options="-parameters" />

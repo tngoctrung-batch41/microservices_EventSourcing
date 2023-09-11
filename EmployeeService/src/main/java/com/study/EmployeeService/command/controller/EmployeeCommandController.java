@@ -14,7 +14,6 @@ import java.util.UUID;
 @RequestMapping("/api/v1/employee")
 @RequiredArgsConstructor
 public class EmployeeCommandController {
-
     private final CommandGateway commandGateway;
     @PostMapping("/create")
     public String createEmployee (@RequestBody EmployeeRequestModel employeeRequestModel){

@@ -8,6 +8,7 @@
       <module fileurl="file://$PROJECT_DIR$/Config-Server/Config-Server.iml" filepath="$PROJECT_DIR$/Config-Server/Config-Server.iml" />
       <module fileurl="file://$PROJECT_DIR$/Discovery-Server/Discovery-Server.iml" filepath="$PROJECT_DIR$/Discovery-Server/Discovery-Server.iml" />
       <module fileurl="file://$PROJECT_DIR$/EmployeeService/EmployeeService.iml" filepath="$PROJECT_DIR$/EmployeeService/EmployeeService.iml" />
+      <module fileurl="file://$PROJECT_DIR$/NotifycationService/NotifycationService.iml" filepath="$PROJECT_DIR$/NotifycationService/NotifycationService.iml" />
       <module fileurl="file://$PROJECT_DIR$/OrderService/OrderService.iml" filepath="$PROJECT_DIR$/OrderService/OrderService.iml" />
       <module fileurl="file://$PROJECT_DIR$/PaymentService/PaymentService.iml" filepath="$PROJECT_DIR$/PaymentService/PaymentService.iml" />
       <module fileurl="file://$PROJECT_DIR$/ShipmentService/ShipmentService.iml" filepath="$PROJECT_DIR$/ShipmentService/ShipmentService.iml" />
