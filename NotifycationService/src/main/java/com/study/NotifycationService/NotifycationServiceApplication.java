@@ -14,7 +14,7 @@ public class NotifycationServiceApplication {
 	@Bean
 	public Consumer<String> handleMessage() {
 		return message -> {
-			//handle event here
+			System.out.println("Received message: " + message);
 		};
 	}
 	public static void main(String[] args) {

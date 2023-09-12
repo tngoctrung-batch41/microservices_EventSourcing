@@ -20,3 +20,7 @@ spring:
           uri: http://localhost:9002
           predicates:
             - Path= /api/v1/employee/**
+        - id: notifycationservice
+          uri: http://localhost:9011
+          predicates:
+            - Path= /api/v1/notify/**
